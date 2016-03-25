@@ -1,0 +1,50 @@
+{% extends 'master.html' %}
+
+{% block title %}Idea Details{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 header">
+			<div class="col-md-11 text-right">
+				<a href="{% url 'accounts-success' %}"><button class="btn btn-primary">Bright Ideas</button></a>
+			</div>
+			<div class="col-md-1 text-right">
+				<a href="{% url 'accounts-logout' %}"><button class="btn btn-primary">Log Out</button></a>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<p><a href="{% url 'accounts-profile' idea.user.id %}">{{ idea.user.username }}</a> says:</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<p class="idea-content">{{ idea.content }}</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<h3>People who liked this post: </h3>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Alias</th>
+						<th>Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for likes in liked %}
+					<tr>
+						<td><a href="{% url 'accounts-profile' likes.user.id %}">{{ likes.user.username }}</a></td>
+						<td>{{ likes.user.first_name }}  {{ likes.user.last_name }}</td>
+					</tr>
+					{% empty %}
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}

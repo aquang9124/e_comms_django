@@ -1,0 +1,58 @@
+{% extends 'master.html' %}
+{% block title %}Index{% endblock %}
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<h2>Hi {{ request.user.first_name }}!</h2>
+		</div>
+		<div class="col-md-6 text-right">
+			<form action="{% url 'accounts-logout' %}">
+				<button class="btn btn-info logout-btn">Log Out</button>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<div class="panel panel-info">
+				<div class="panel-heading text-center">
+					<h2>{{ request.user.first_name }}'s Wall</h2>
+				</div>
+				<div class="panel-body">
+				{% if messages %}
+				<ul class="messages">
+					{% for message in messages %}
+					<li class="{{ message.tags }}">{{ message }}</li>
+					{% endfor %}
+				</ul>
+				{% endif %}
+					<form action="{% url 'posts-create' request.user.id %}" method="post">
+						{% csrf_token %}
+						<div class="col-md-10">
+							<input name="idea" class="form-control" type="text" placeholder="Post something witty here...">
+						</div>
+						<div class="col-md-2 text-center">
+							<button class="btn btn-default">Idea!</button>
+						</div>
+					</form>
+				</div>
+				<div class="panel-footer">
+				{% for idea in ideas %}
+					<p class="poster"><a href="{% url 'accounts-profile' idea.user.id %}">{{ idea.user.first_name }}</a> says:</p>
+					<p class="idea-content">{{ idea.content }}</p>
+					<a href="{% url 'posts-like' idea.id %}">Like</a>
+					<p class="inline-p"><a href="{% url 'posts-details' idea.id %}">{{ idea.likes }} people</a> like this</p>
+					{% if idea.user.id == request.user.id %}
+					<form action="{% url 'posts-delete' idea.id %}" method="post">
+						{% csrf_token %}
+						<button class="btn btn-danger">Delete Idea</button>
+					</form>
+					{% endif %}
+				{% empty %}
+				{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

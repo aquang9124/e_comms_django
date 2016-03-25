@@ -1,0 +1,22 @@
+{% extends 'master.html' %}
+{% block title %}Log In{% endblock %}
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<h2>Log In</h2>
+			<form action="{% url 'accounts-login' %}" method="post">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button class="btn btn-success">Log In</button>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<h2>Need to register?</h2>
+			<a href="{% url 'accounts-register' %}" class="btn btn-default">Register</a>
+		</div>
+	</div>
+</div>
+{% endblock %}

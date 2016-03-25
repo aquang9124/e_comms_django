@@ -1,0 +1,35 @@
+{% extends 'master.html' %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 header">
+			<div class="col-md-11 text-right">
+				<a href="{% url 'accounts-success' %}"><button class="btn btn-primary">Bright Ideas</button></a>
+			</div>
+			<div class="col-md-1 text-right">
+				<a href="{% url 'accounts-logout' %}"><button class="btn btn-primary">Log Out</button></a>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<div class="panel panel-default">
+				<div class="panel-heading text-center">
+					<h3>{{ user_info.first_name }} {{ user_info.last_name }}'s Profile</h3>
+				</div>
+				<div class="panel-body">
+					<p>Alias: {{ user_info.username }}</p>
+					<p>Email: {{ user_info.email }}</p>
+				</div>
+				<div class="panel-footer">
+					<p>Total Number of Posts: {{ num_posts }}</p>
+					<p>Total Number of Likes: {{ num_likes }}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

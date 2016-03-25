@@ -1,0 +1,32 @@
+.logout-btn {
+	margin-top: 20px;
+}
+
+.error {
+	color: red;
+}
+
+.success {
+	color: green;
+}
+
+.inline-p {
+	display: inline-block;
+	margin-left: 10px;
+}
+
+.idea-content {
+	height: 100px;
+	width: 100%;
+	border: 2px solid black;
+	padding: 10px;
+}
+
+.header {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.poster {
+	margin-top: 10px;
+}
